@@ -22,7 +22,6 @@
       width: 100%;
       height: 100%;
     }
-    /* Estilo do botão fixo no topo */
     #top-ar-btn {
       position: fixed;
       top: 20px;
@@ -43,24 +42,31 @@
 </head>
 <body>
 
-  <!-- Botão fixo no topo da tela -->
-  <button id="top-ar-btn" onclick="ativarAR()">📦 Ver em Realidade Aumentada</button>
+  <button id="top-ar-btn" onclick="forcarAR()">📦 Ver em Realidade Aumentada</button>
 
   <model-viewer 
     id="modelo3d"
     src="seu-objeto.glb" 
     alt="Objeto 3D em AR" 
     ar 
+    ar-modes="scene-viewer webxr quick-look" 
     camera-controls 
     auto-rotate>
   </model-viewer>
 
   <script>
-    // Função para forçar a abertura do modo AR ao clicar no botão fixo
-    function ativarAR() {
+    function forcarAR() {
       const modelViewer = document.querySelector('#modelo3d');
-      if (modelViewer) {
+      
+      // Tenta acionar a função padrão do Model Viewer primeiro
+      if (modelViewer && modelViewer.canActivateAR) {
         modelViewer.activateAR();
+      } else {
+        // Fallback direto via Intent do Google Scene Viewer para Android (Xiaomi)
+        const glbUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/seu-objeto.glb';
+        const intentUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(glbUrl)}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
+        
+        window.location.href = intentUrl;
       }
     }
   </script>
