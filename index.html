@@ -28,20 +28,20 @@
 
   <!-- Componente 3D / AR -->
   <model-viewer 
-    src="seu-objeto.glb" 
-    ios-src="seu-objeto.usdz"
-    alt="Objeto 3D interativo" 
-    ar 
-    ar-modes="webxr scene-viewer quick-look" 
-    camera-controls 
-    auto-rotate
-    shadow-intensity="1">
-    
-    <!-- Botão customizado para ativar a AR (opcional) -->
-    <button slot="ar-button" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; background-color: #007bff; color: white; border: none; border-radius: 20px; font-weight: bold; cursor: pointer;">
-      Ver no seu espaço (AR)
-    </button>
-  </model-viewer>
+  src="seu-objeto.glb" 
+  ios-src="seu-objeto.usdz"
+  alt="Objeto 3D em AR" 
+  ar 
+  ar-modes="webxr scene-viewer quick-look" 
+  camera-controls 
+  auto-rotate
+  reveal="auto">
+  
+  <!-- Força um botão fixo na tela que não some -->
+  <button slot="ar-button" style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); padding: 14px 28px; background-color: #28a745; color: white; border: none; border-radius: 30px; font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 100;">
+    📦 Ver em Realidade Aumentada
+  </button>
+</model-viewer>
 
 </body>
 </html>
